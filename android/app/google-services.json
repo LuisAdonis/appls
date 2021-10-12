@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "157606854606",
+    "project_id": "app-lsec",
+    "storage_bucket": "app-lsec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:157606854606:android:c44787e3086546f981f59f",
+        "android_client_info": {
+          "package_name": "com.devel.appls"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "157606854606-36km2938p7uqnf0p1adv7f04i5dr6jeh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBf6C_2D_lFNL_EH6cG_YxO9vMQQlwW7Rs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "157606854606-36km2938p7uqnf0p1adv7f04i5dr6jeh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
