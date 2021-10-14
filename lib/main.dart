@@ -4,6 +4,7 @@ import 'package:appls/route/routers.dart';
 import 'package:appls/service/auth_service.dart';
 import 'package:appls/shareprefenrences/sharepreferences.dart';
 import 'package:appls/theme.dart';
+import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,9 +15,12 @@ Future<void> _messageHandler(RemoteMessage message) async {
   print('background message ${message.notification!.body}');
 }
 
+List<CameraDescription> cameras = [];
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  cameras = await availableCameras();
   final presf = SPUsuarios();
   await presf.initPrefs();
   FirebaseMessaging.onBackgroundMessage(_messageHandler);

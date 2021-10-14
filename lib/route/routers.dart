@@ -5,10 +5,13 @@ import 'package:appls/ui/diccionarrio/diccionario_page.dart';
 import 'package:appls/ui/diccionarrio/resultado_page.dart';
 import 'package:appls/ui/estudiar/estudiar_screen.dart';
 import 'package:appls/ui/evaluacion/evaluacion_screen.dart';
+import 'package:appls/ui/evaluacion/generandonr.dart';
+import 'package:appls/ui/evaluacion/generarpreguntas.dart';
 import 'package:appls/ui/evaluacion/quiz_screen.dart';
 import 'package:appls/ui/evaluacion/result.dart';
 import 'package:appls/ui/home_page.dart';
 import 'package:appls/ui/institucion.dart';
+import 'package:appls/ui/lmkit/lenguajelm_screen.dart';
 import 'package:appls/ui/splash_screen.dart';
 import 'package:appls/ui/login.dart';
 import 'package:appls/ui/utils/dadata_ctg.dart';
@@ -42,22 +45,21 @@ class Routers {
         return _pageTranst(settings: settings, child: const AcercaScreen(), type: PageTransitionType.rightToLeft);
       case 'Institución':
         return _pageTranst(settings: settings, child: const InstitucionScreen(), type: PageTransitionType.rightToLeft);
+      case 'Lenguaje ML':
+        return _pageTranst(settings: settings, child: const LenguahelmScreen(), type: PageTransitionType.rightToLeft);
       case 'Evaluación':
         return _pageTranst(settings: settings, child: const EvaluacionScreen(), type: PageTransitionType.rightToLeft);
       case 'QuizScreen':
         final a = settings.arguments as DataArguments;
         return _pageTranst(settings: settings, child: QuizScreen(arguments: a), type: PageTransitionType.rightToLeft);
+      case 'GenerarEvaluacion':
+        return _pageTranst(settings: settings, child: const GenerarPregunta(), type: PageTransitionType.rightToLeft);
+      case 'GenerarEvaluacionr':
+        final a = settings.arguments as DataArguments;
+        return _pageTranst(settings: settings, child: GenerarPreguntar(arguments: a), type: PageTransitionType.rightToLeft);
       case 'Resultado':
         final a = settings.arguments as ResultArguments;
-
-        return _pageTranst(
-            settings: settings,
-            child: ResultScreen(
-              questions: a.questions,
-              totalTime: a.totalTime,
-              score: a.score,
-            ),
-            type: PageTransitionType.rightToLeft);
+        return _pageTranst(settings: settings, child: ResultScreen(questions: a.questions, totalTime: a.totalTime, score: a.score), type: PageTransitionType.rightToLeft);
 
       default:
         return _pageTranst(

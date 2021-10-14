@@ -1,4 +1,5 @@
 import 'package:appls/const.dart';
+import 'package:faker/faker.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -42,14 +43,18 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
         minimumFetchInterval: Duration.zero,
       ));
       await remoteConfig.fetchAndActivate();
-      remoteConfig.getString('force_update_current_version');
+      bool a = remoteConfig.getBool('force_status');
       double newVersion = double.parse(remoteConfig.getString('force_update_current_version').trim().replaceAll(".", ""));
       // ignore: avoid_print
       print("newVersion: $newVersion currentVersion $currentVersion");
-      if (newVersion > currentVersion) {
-        _showVersionDialog(context);
+      if (a) {
+        if (newVersion > currentVersion) {
+          _showVersionDialog(context);
+        } else {
+          fn();
+        }
       } else {
-        fn();
+        _showVersionDialogDisable(context);
       }
     } on PlatformException catch (exception) {
       // Fetch exception.
@@ -76,6 +81,39 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       builder: (BuildContext context) {
         String title = "Nueva actualización disponible";
         String message = "Hay una versión nueva de la aplicación disponible, actualícela ahora.";
+        String btnLabel = "Actualizar ahora";
+        String btnLabelCancel = "Más tarde";
+        return AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: <Widget>[
+            OutlinedButton(
+                child: Text(btnLabel),
+                onPressed: () {
+                  SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+                  //  _launchURL(PLAY_STORE_URL);
+                }),
+            OutlinedButton(
+              child: Text(btnLabelCancel),
+              onPressed: () {
+                SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  _showVersionDialogDisable(context) async {
+    var faker = Faker();
+    await showDialog<String>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        String title = "Estado de la app";
+        String message = "${faker.lorem.sentence()}?";
         String btnLabel = "Actualizar ahora";
         String btnLabelCancel = "Más tarde";
         return AlertDialog(
