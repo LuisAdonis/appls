@@ -55,16 +55,16 @@ class BoundingBox extends StatelessWidget {
           width: w,
           height: h,
           child: Container(
-            padding: EdgeInsets.only(top: 5.0, left: 5.0),
+            padding: const EdgeInsets.only(top: 5.0, left: 5.0),
             decoration: BoxDecoration(
               border: Border.all(
-                color: Color.fromRGBO(37, 213, 253, 1.0),
+                color: const Color.fromRGBO(37, 213, 253, 1.0),
                 width: 3.0,
               ),
             ),
             child: Text(
-              "${re["detectedClass"]} ${(re["confidenceInClass"] * 100).toStringAsFixed(0)}%",
-              style: TextStyle(
+              "${re["detectedClass"]} ${(re["confidenceInClass"] * 100 * 1.6).toStringAsFixed(0)}%",
+              style: const TextStyle(
                 color: Color.fromRGBO(37, 213, 253, 1.0),
                 fontSize: 80.0,
                 fontWeight: FontWeight.bold,

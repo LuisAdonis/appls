@@ -8,32 +8,36 @@ class Question {
     required this.imagen,
     required this.respuestas,
     required this.respuestascorrecta,
+    required this.categoria,
   });
   final String id;
   final String pregunta;
   final List<String> respuestas;
   final String respuestascorrecta;
   final String imagen;
+  final String categoria;
 
   Question.fromSnapshot(DataSnapshot snapshot)
       : id = snapshot.key!,
         pregunta = snapshot.value["pregunta"],
         respuestas = List.from(snapshot.value["respuestas"]),
         respuestascorrecta = snapshot.value["respuestascorrecta"],
-        imagen = snapshot.value["imagen"];
+        imagen = snapshot.value["imagen"],
+        categoria = snapshot.value["categoria"];
 
-  toJson() {
+  Map<String, dynamic> toJson() {
     return {
       "pregunta": pregunta,
       "respuestas": respuestas,
       "respuestascorrecta": respuestascorrecta,
       "imagen": imagen,
+      "categoria": categoria,
     };
   }
 
   @override
   String toString() {
-    return 'Question(id: $id, pregunta: $pregunta, respuestas: $respuestas, respuestascorrecta: $respuestascorrecta,imagen:$imagen)';
+    return 'Question(id: $id, pregunta: $pregunta, respuestas: $respuestas, respuestascorrecta: $respuestascorrecta,imagen:$imagen,categoria:$categoria)';
   }
 
   @override

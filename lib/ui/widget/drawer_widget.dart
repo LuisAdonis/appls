@@ -248,7 +248,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
     super.initState();
   }
 
-  void setDrawerListArray() {
+  Future<void> setDrawerListArray() async {
     drawerList = <DrawerList>[
       DrawerList(
         index: DrawerIndex.home,
@@ -269,11 +269,11 @@ class _HomeDrawerState extends State<HomeDrawer> {
         // isAssetsImage: true,
         // imageName: 'assets/images/supportIcon.png',
       ),
-      // DrawerList(
-      //   index: DrawerIndex.Invite,
-      //   labelName: 'Invite Friend',
-      //   icon: Icon(Icons.group),
-      // ),
+      DrawerList(
+        index: DrawerIndex.share,
+        labelName: 'Estadisticas',
+        icon: const Icon(Icons.show_chart),
+      ),
       // DrawerList(
       //   index: DrawerIndex.Share,
       //   labelName: 'Rate the app',
@@ -292,6 +292,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserModel?>(context);
+
     return Scaffold(
       backgroundColor: const Color(0xFFEDF0F2).withOpacity(0.5),
       body: Column(
@@ -328,20 +329,25 @@ class _HomeDrawerState extends State<HomeDrawer> {
                               borderRadius: const BorderRadius.all(Radius.circular(60.0)),
                               child: user != null
                                   ? CircleAvatar(
-                                      child: Text(user.userId!.substring(0, 2)),
+                                      backgroundImage: NetworkImage(user.photoURL != null
+                                          ? "${user.photoURL}"
+                                          : "https://firebasestorage.googleapis.com/v0/b/app-lsec.appspot.com/o/85622928-icono-de-perfil-de-avatar-predeterminado-marcador-de-posici%C3%B3n-de-foto-gris-vectores-de-ilustraciones.jpg?alt=media&token=ac3bf05d-6b29-4ab8-97d1-b21934ccadf4"),
                                     )
-                                  : Image.asset('assets/logosenas.png'),
+                                  : Image.asset(
+                                      'assets/logosenas.png',
+                                      color: Colors.deepPurple,
+                                    ),
                             ),
                           ),
                         ),
                       );
                     },
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 24, left: 4),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 24, left: 4),
                     child: Text(
-                      'ASL Flutter',
-                      style: TextStyle(
+                      user != null ? '${user.name}' : "APPLS",
+                      style: const TextStyle(
                         fontWeight: FontWeight.w600,
                         color: Colors.grey,
                         fontSize: 18,
@@ -367,6 +373,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                 inkwell(drawerList![0]),
                 if (user == null) inkwell(drawerList![1]),
                 if (user == null) inkwell(drawerList![2]),
+                if (user != null) inkwell(drawerList![3]),
               ],
             ),
           ),

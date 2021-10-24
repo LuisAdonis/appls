@@ -161,7 +161,7 @@ class _QuizScreenState extends State<QuizScreen> {
                           ? answer == currentQuestion.respuestascorrecta
                               ? const Icon(Icons.check_circle, color: Colors.teal)
                               : const Icon(Icons.close, color: Colors.red)
-                          : Text(""),
+                          : const Text(""),
                       title: Text(
                         "$answer  ",
                         style: TextStyle(

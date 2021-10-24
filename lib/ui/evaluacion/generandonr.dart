@@ -5,6 +5,7 @@ import 'package:appls/models/data_arguments_model.dart';
 import 'package:appls/models/dbdata_model.dart';
 import 'package:appls/models/question.dart';
 import 'package:appls/models/result_arguments_model.dart';
+import 'package:appls/service/audio.dart';
 import 'package:appls/shareprefenrences/sharepreferences.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -12,7 +13,7 @@ import 'package:flutter/material.dart';
 
 class GenerarPreguntar extends StatefulWidget {
   final DataArguments arguments;
-  GenerarPreguntar({Key? key, required this.arguments}) : super(key: key);
+  const GenerarPreguntar({Key? key, required this.arguments}) : super(key: key);
 
   @override
   _GenerarPreguntarState createState() => _GenerarPreguntarState();
@@ -20,6 +21,7 @@ class GenerarPreguntar extends StatefulWidget {
 
 class _GenerarPreguntarState extends State<GenerarPreguntar> {
   final FirebaseDatabase _database = FirebaseDatabase.instance;
+  // ignore: unused_field
   late StreamSubscription<Event> _onTodoAddedSubscription;
   late Query _todoQuery;
   List<Question> questions = [];
@@ -34,7 +36,7 @@ class _GenerarPreguntarState extends State<GenerarPreguntar> {
 
   late Timer _timer;
 
-  int _currentTime = 2;
+  int _currentTime = 1;
 
   @override
   void initState() {
@@ -42,6 +44,8 @@ class _GenerarPreguntarState extends State<GenerarPreguntar> {
     _todoList = [];
     _todoList1 = [];
     _todoQuery = _database.reference().child(widget.arguments.nodep).child(widget.arguments.ctg!);
+    // ignore: avoid_print
+    print("${widget.arguments.ctg} ${widget.arguments.nombreac} ${widget.arguments.nodep}");
     _onTodoAddedSubscription = _todoQuery.onChildAdded.listen(onEntryAdded);
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       // ignore: avoid_print
@@ -117,15 +121,17 @@ class _GenerarPreguntarState extends State<GenerarPreguntar> {
             imagen: "${_todoList[r].urldata}",
             pregunta: "¿Que significa la imagen?",
             respuestas: friends,
+            categoria: widget.arguments.ctg!,
             respuestascorrecta: _todoList[r].nombre!,
           ));
         });
         // ignore: avoid_print
-        print("1:  ${r}");
+        print("1:  $r");
       });
     } else {
       // ignore: avoid_print
       print("igual");
+      fn();
     }
     setState(() {});
   }
@@ -133,11 +139,16 @@ class _GenerarPreguntarState extends State<GenerarPreguntar> {
   @override
   Widget build(BuildContext context) {
     if (_todoList1.isEmpty) {
-      return Scaffold(
-        body: CircularProgressIndicator(),
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
       );
     } else {
       final Question currentQuestion = _todoList1[_currentIndex];
+      if (presf.audio) {
+        AudioLS().speak("${currentQuestion.pregunta} ");
+      }
       return Scaffold(
         appBar: AppBar(
           title: const Text("Evaluacíon"),
@@ -212,7 +223,7 @@ class _GenerarPreguntarState extends State<GenerarPreguntar> {
                             ? answer == currentQuestion.respuestascorrecta
                                 ? const Icon(Icons.check_circle, color: Colors.teal)
                                 : const Icon(Icons.close, color: Colors.red)
-                            : Text(""),
+                            : const Text(""),
                         title: Text(
                           "$answer  ",
                           style: TextStyle(

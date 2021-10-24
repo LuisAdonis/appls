@@ -79,7 +79,7 @@ class _CameraFeedState extends State<CameraFeed> {
   @override
   Widget build(BuildContext context) {
     if (controller == null || !controller!.value.isInitialized) {
-      return Center(
+      return const Center(
         child: CircularProgressIndicator(),
       );
     }

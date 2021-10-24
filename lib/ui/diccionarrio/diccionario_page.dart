@@ -1,5 +1,7 @@
 import 'package:appls/models/data_arguments_model.dart';
 import 'package:appls/models/diccionario_model.dart';
+import 'package:appls/service/audio.dart';
+import 'package:appls/shareprefenrences/sharepreferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -13,6 +15,7 @@ class DiccionarioPage extends StatefulWidget {
 }
 
 class _DiccionarioPageState extends State<DiccionarioPage> {
+  final presf = SPUsuarios();
   final TextEditingController _controller = TextEditingController();
   List<DiccionarioModel> busqueda = [];
   @override
@@ -86,6 +89,11 @@ class _DiccionarioPageState extends State<DiccionarioPage> {
               child: ListTile(
                 leading: const Icon(Icons.search),
                 title: TextField(
+                  onSubmitted: (v) {
+                    if (presf.audio) {
+                      AudioLS().speak("Buscar ");
+                    }
+                  },
                   onChanged: (String value) async {
                     await makeRequest(value);
                   },
@@ -95,6 +103,9 @@ class _DiccionarioPageState extends State<DiccionarioPage> {
                 trailing: IconButton(
                   icon: const Icon(Icons.cancel),
                   onPressed: () {
+                    if (presf.audio) {
+                      AudioLS().speak("Limpiar ");
+                    }
                     _controller.clear();
                   },
                 ),
@@ -111,6 +122,9 @@ class _DiccionarioPageState extends State<DiccionarioPage> {
                     padding: const EdgeInsets.all(10.0),
                     child: InkWell(
                       onTap: () {
+                        if (presf.audio) {
+                          AudioLS().speak("selecionado ${busqueda[index].text}");
+                        }
                         Navigator.pushNamed(
                           context,
                           'Resultados',

@@ -75,6 +75,9 @@ class _EstudiarScreenState extends State<EstudiarScreen> {
                   startColor: '#738AE6',
                   endColor: '#5C5EDD',
                   ontap: () {
+                    if (presf.audio) {
+                      AudioLS().speak("Números");
+                    }
                     Navigator.pushNamed(
                       context,
                       'DBData',
@@ -95,6 +98,9 @@ class _EstudiarScreenState extends State<EstudiarScreen> {
                   startColor: '#738AE6',
                   endColor: '#5C5EDD',
                   ontap: () {
+                    if (presf.audio) {
+                      AudioLS().speak("Calendario");
+                    }
                     Navigator.pushNamed(
                       context,
                       'DBData',
@@ -115,6 +121,9 @@ class _EstudiarScreenState extends State<EstudiarScreen> {
                   startColor: '#738AE6',
                   endColor: '#5C5EDD',
                   ontap: () {
+                    if (presf.audio) {
+                      AudioLS().speak("Aprendizaje");
+                    }
                     Navigator.pushNamed(
                       context,
                       'DBDatac',

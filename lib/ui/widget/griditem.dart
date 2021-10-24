@@ -28,7 +28,7 @@ Widget singleMyCourse1({
                   Text(
                     title,
                     textAlign: TextAlign.center,
-                    textScaleFactor: 1.3,
+                    textScaleFactor: 0.9,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -47,7 +47,7 @@ Widget singleMyCourse1({
                             child: Text(
                               type,
                               textAlign: TextAlign.center,
-                              textScaleFactor: 1.3,
+                              textScaleFactor: 0.9,
                               style: const TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 12,
@@ -134,7 +134,7 @@ Widget singleMyCourse2({
                   Text(
                     title,
                     textAlign: TextAlign.center,
-                    textScaleFactor: 1.3,
+                    textScaleFactor: 0.9,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -153,7 +153,7 @@ Widget singleMyCourse2({
                             child: Text(
                               type,
                               textAlign: TextAlign.center,
-                              textScaleFactor: 1.3,
+                              textScaleFactor: 1,
                               style: const TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 12,

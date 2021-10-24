@@ -1,6 +1,9 @@
 import 'package:appls/ui/dashboard/dashboardscreen.dart';
-import 'package:appls/ui/login.dart';
+import 'package:appls/ui/dashboard/estadistias_screen.dart';
+import 'package:appls/ui/logins.dart';
+import 'package:appls/ui/register_page.dart';
 import 'package:appls/ui/widget/drawer_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
@@ -58,6 +61,7 @@ class _HomePageState extends State<HomePage> {
       print('Message clicked! $message');
     });
     super.initState();
+    asaa();
   }
 
   void changeIndex(DrawerIndex drawerIndexdata) {
@@ -71,9 +75,13 @@ class _HomePageState extends State<HomePage> {
         setState(() {
           screenView = const LoginPage();
         });
-      } else if (drawerIndex == DrawerIndex.feedBack) {
+      } else if (drawerIndex == DrawerIndex.registro) {
         setState(() {
-          screenView = const DashboardScreen();
+          screenView = const RegisterPage();
+        });
+      } else if (drawerIndex == DrawerIndex.share) {
+        setState(() {
+          screenView = const EstadistiasScreen();
         });
       } else {
         //do in your way......
@@ -95,5 +103,11 @@ class _HomePageState extends State<HomePage> {
         //we replace screen view as we need on navigate starting screens like MyHomePage, HelpScreen, FeedbackScreen, etc...
       ),
     );
+  }
+
+  Future<void> asaa() async {
+    await FirebaseAuth.instance.currentUser!.reload().then((value) {
+      print("object");
+    });
   }
 }

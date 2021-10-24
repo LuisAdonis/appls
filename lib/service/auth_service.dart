@@ -1,10 +1,27 @@
 import 'package:appls/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
+  final googleSingin = GoogleSignIn();
+  GoogleSignInAccount? _user;
   //create user obj from firebase user
+  GoogleSignInAccount get usera => _user!;
+
+  Future googleLogin() async {
+    final googleusers = await googleSingin.signIn();
+    if (googleusers == null) return;
+    _user = googleusers;
+    final googleAut = await googleusers.authentication;
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAut.accessToken,
+      idToken: googleAut.idToken,
+    );
+
+    final data = await FirebaseAuth.instance.signInWithCredential(credential);
+    return _userFromFirebase(data.user!);
+  }
 
   UserModel? _userFromFirebase(User user) {
     return UserModel(
@@ -37,8 +54,12 @@ class AuthService {
 
   Future signUpWithEmailPassword({required String email, required String name, required String password}) async {
     try {
-      UserCredential cred = await _auth.createUserWithEmailAndPassword(email: email, password: password);
-      User? user = cred.user;
+      await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      await _auth.currentUser!.updateDisplayName(name);
+      await _auth.currentUser!.updatePhotoURL(
+          "https://firebasestorage.googleapis.com/v0/b/app-lsec.appspot.com/o/85622928-icono-de-perfil-de-avatar-predeterminado-marcador-de-posici%C3%B3n-de-foto-gris-vectores-de-ilustraciones.jpg?alt=media&token=ac3bf05d-6b29-4ab8-97d1-b21934ccadf4");
+
+      User? user = await _auth.currentUser;
       return _userFromFirebase(user!);
     } catch (e) {
       // ignore: avoid_print

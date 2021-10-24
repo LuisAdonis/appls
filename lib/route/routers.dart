@@ -12,8 +12,9 @@ import 'package:appls/ui/evaluacion/result.dart';
 import 'package:appls/ui/home_page.dart';
 import 'package:appls/ui/institucion.dart';
 import 'package:appls/ui/lmkit/lenguajelm_screen.dart';
+import 'package:appls/ui/logins.dart';
+import 'package:appls/ui/register_page.dart';
 import 'package:appls/ui/splash_screen.dart';
-import 'package:appls/ui/login.dart';
 import 'package:appls/ui/utils/dadata_ctg.dart';
 import 'package:appls/ui/utils/dbdata.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,8 @@ class Routers {
         return _pageTranst(settings: settings, child: const SplashScreen(), type: PageTransitionType.rightToLeft);
       case 'LoginScreen':
         return _pageTranst(settings: settings, child: const LoginPage(), type: PageTransitionType.rightToLeft);
+      case 'Registro':
+        return _pageTranst(settings: settings, child: const RegisterPage(), type: PageTransitionType.rightToLeft);
       case 'HomePage':
         return _pageTranst(settings: settings, child: const HomePage(), type: PageTransitionType.rightToLeft);
       case 'Estudiar':

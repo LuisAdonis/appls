@@ -2,14 +2,12 @@ import 'dart:async';
 
 import 'package:appls/models/data_arguments_model.dart';
 import 'package:appls/models/dbdata_model.dart';
-import 'package:appls/models/user_model.dart';
 import 'package:appls/service/audio.dart';
 import 'package:appls/shareprefenrences/sharepreferences.dart';
 import 'package:faker/faker.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 
 class EvaluacionScreen extends StatefulWidget {
   const EvaluacionScreen({Key? key}) : super(key: key);
@@ -29,7 +27,7 @@ class _EvaluacionScreenState extends State<EvaluacionScreen> {
   void initState() {
     super.initState();
     _todoList = [];
-    _todoQuery = _database.reference().child("Evaluacion/Categorias");
+    _todoQuery = _database.reference().child("Categoriastest");
     _onTodoAddedSubscription = _todoQuery.onChildAdded.listen(onEntryAdded);
   }
 
@@ -67,11 +65,11 @@ class _EvaluacionScreenState extends State<EvaluacionScreen> {
 
                 Navigator.pushNamed(
                   context,
-                  'QuizScreen',
+                  'GenerarEvaluacionr',
                   arguments: DataArguments(
                     nombreac: "${_todoList[index].nombre}".toUpperCase().replaceAll("-", " "),
                     ctg: _todoList[index].nombre!,
-                    nodep: 'Evaluacion/Categorias',
+                    nodep: 'Categoriastest',
                   ),
                 );
               },
@@ -87,8 +85,9 @@ class _EvaluacionScreenState extends State<EvaluacionScreen> {
                   ),
                   Text(
                     _todoList[index].nombre!.toUpperCase().replaceAll("-", " "),
-                    style: const TextStyle(fontSize: 20),
+                    style: const TextStyle(fontSize: 18),
                     textScaleFactor: 1.0,
+                    textAlign: TextAlign.center,
                   ),
                 ],
               ),
@@ -105,7 +104,6 @@ class _EvaluacionScreenState extends State<EvaluacionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<UserModel?>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -119,32 +117,32 @@ class _EvaluacionScreenState extends State<EvaluacionScreen> {
           ),
         ),
         centerTitle: true,
-        actions: [
+        actions: const [
           // user != null
           //     ?
-          TextButton(
-            onPressed: () {
-              Navigator.pushNamed(
-                context,
-                'GenerarEvaluacion',
-              );
-            },
-            child: const Text("Generar Quiz"),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pushNamed(
-                context,
-                'GenerarEvaluacionr',
-                arguments: DataArguments(
-                  nombreac: "abecedario",
-                  ctg: "abecedario",
-                  nodep: 'Categorias',
-                ),
-              );
-            },
-            child: const Text("Generar Quiz r"),
-          )
+          // TextButton(
+          //   onPressed: () {
+          //     Navigator.pushNamed(
+          //       context,
+          //       'GenerarEvaluacion',
+          //     );
+          //   },
+          //   child: const Text("Generar Quiz"),
+          // ),
+          // TextButton(
+          //   onPressed: () {
+          //     Navigator.pushNamed(
+          //       context,
+          //       'GenerarEvaluacionr',
+          //       arguments: DataArguments(
+          //         nombreac: "abecedario",
+          //         ctg: "abecedario",
+          //         nodep: 'Categorias',
+          //       ),
+          //     );
+          //   },
+          //   child: const Text("Generar Quiz r"),
+          // )
           // : Container(),
         ],
       ),

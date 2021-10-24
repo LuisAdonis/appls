@@ -66,7 +66,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   endColor: '#FF5287',
                   ontap: () {
                     if (presf.audio) {
-                      AudioLS().speak("Diccionario");
+                      AudioLS().speak(
+                        "Diccionario de Lengua de Señas Ecuatoriana Gabriel Román",
+                      );
                     }
                     Navigator.pushNamed(
                       context,

@@ -1,5 +1,7 @@
 import 'package:appls/const.dart';
 import 'package:appls/models/sceen_arg_model.dart';
+import 'package:appls/service/audio.dart';
+import 'package:appls/shareprefenrences/sharepreferences.dart';
 import 'package:appls/ui/utils/hexcolor.dart';
 import 'package:appls/ui/widget/realtime/bounding_box.dart';
 import 'package:appls/ui/widget/realtime/camerafeed.dart';
@@ -48,16 +50,23 @@ class _LenguahelmScreenState extends State<LenguahelmScreen> {
     loadTfModel();
   }
 
+  final presf = SPUsuarios();
+
   @override
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
-    if (_recognitions.isNotEmpty) {
-      if (data.isNotEmpty) {
-        if (data.last != _recognitions[0]['detectedClass']) {
-          data.add("${_recognitions[0]['detectedClass']}");
-        }
-      } else {
-        data.add("${_recognitions[0]['detectedClass']}");
+//  if (_recognitions.isNotEmpty) {
+//                       if (data.isNotEmpty) {
+//                         if (data.last != _recognitions[0]['detectedClass']) {
+//                           data.add("${_recognitions[0]['detectedClass']}");
+//                         }
+//                       } else {
+//                         data.add("${_recognitions[0]['detectedClass']}");
+//                       }
+//                     }
+    if (stado) {
+      if (presf.audio) {
+        AudioLS().speak(data.toString().replaceAll(",", "").replaceAll("[", "").replaceAll("]", ""));
       }
     }
     final args = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
@@ -77,12 +86,25 @@ class _LenguahelmScreenState extends State<LenguahelmScreen> {
             child: Stack(
               children: [
                 CameraFeed(cameras: cameras, setRecognitions: setRecognitions, isDetecting: stado),
-                BoundingBox(
-                  _recognitions,
-                  math.max(_imageHeight, _imageWidth),
-                  math.min(_imageHeight, _imageWidth),
-                  screen.height,
-                  screen.width,
+                GestureDetector(
+                  onTap: () {
+                    if (_recognitions.isNotEmpty) {
+                      if (data.isNotEmpty) {
+                        if (data.last != _recognitions[0]['detectedClass']) {
+                          data.add("${_recognitions[0]['detectedClass']}");
+                        }
+                      } else {
+                        data.add("${_recognitions[0]['detectedClass']}");
+                      }
+                    }
+                  },
+                  child: BoundingBox(
+                    _recognitions,
+                    math.max(_imageHeight, _imageWidth),
+                    math.min(_imageHeight, _imageWidth),
+                    screen.height,
+                    screen.width,
+                  ),
                 ),
                 Positioned(
                   bottom: 0,
@@ -115,11 +137,11 @@ class _LenguahelmScreenState extends State<LenguahelmScreen> {
                                   data.clear();
                                 });
                               },
-                              child: Icon(Icons.refresh),
+                              child: const Icon(Icons.refresh),
                             ),
                           ],
                         ),
-                        Text(data.toString()),
+                        Text(data.toString().replaceAll(",", "").replaceAll("[", "").replaceAll("]", "")),
                       ],
                     ),
                   ),

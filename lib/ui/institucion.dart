@@ -1,11 +1,22 @@
+import 'package:appls/service/audio.dart';
+import 'package:appls/shareprefenrences/sharepreferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class InstitucionScreen extends StatelessWidget {
+class InstitucionScreen extends StatefulWidget {
   const InstitucionScreen({Key? key}) : super(key: key);
 
   @override
+  State<InstitucionScreen> createState() => _InstitucionScreenState();
+}
+
+class _InstitucionScreenState extends State<InstitucionScreen> {
+  final presf = SPUsuarios();
+  @override
   Widget build(BuildContext context) {
+    if (presf.audio) {
+      AudioLS().speak("UNIDAD EDUCATIVA FIS COMISIONAL “JUAN MONTALVO” DRA. EDELMARY MUÑOZ AVEIGA MG rectora");
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,

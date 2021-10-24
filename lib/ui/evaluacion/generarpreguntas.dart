@@ -128,6 +128,7 @@ class _GenerarPreguntaState extends State<GenerarPregunta> {
                           id: "ds",
                           imagen: "${_todoList[r].urldata}",
                           pregunta: "${faker.lorem.sentence()}?",
+                          categoria: "ss",
                           respuestas: friends,
                           respuestascorrecta: _todoList[r].nombre!,
                         ));
@@ -164,7 +165,7 @@ class _GenerarPreguntaState extends State<GenerarPregunta> {
                     itemCount: _todoList1.length,
                     itemBuilder: (BuildContext context, int index) {
                       return ListTile(
-                        leading: Text("${_todoList1[index].respuestascorrecta}"),
+                        leading: Text(_todoList1[index].respuestascorrecta),
                         title: Text(_todoList1[index].respuestascorrecta),
                         subtitle: Text("${_todoList1[index].respuestas}"),
                       );
