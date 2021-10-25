@@ -4,6 +4,7 @@ import 'package:appls/models/data_arguments_model.dart';
 import 'package:appls/models/dbdata_model.dart';
 import 'package:appls/service/audio.dart';
 import 'package:appls/shareprefenrences/sharepreferences.dart';
+import 'package:appls/ui/widget/background.dart';
 import 'package:faker/faker.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -81,6 +82,7 @@ class _EvaluacionScreenState extends State<EvaluacionScreen> {
                     height: 120,
                     child: Image.asset(
                       "assets/logosenas.png",
+                      color: Colors.deepPurple,
                     ),
                   ),
                   Text(
@@ -146,9 +148,11 @@ class _EvaluacionScreenState extends State<EvaluacionScreen> {
           // : Container(),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: showTodoList(),
+      body: Background(
+        child: SingleChildScrollView(
+          child: Center(
+            child: showTodoList(),
+          ),
         ),
       ),
     );

@@ -55,7 +55,7 @@ dependencies:
   camera: ^0.9.3+1
   syncfusion_flutter_charts: ^19.3.45+1
   google_sign_in: ^5.1.1
-  font_awesome_flutter: ^9.2.0
+
 
 dev_dependencies:
   flutter_test:
