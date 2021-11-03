@@ -164,63 +164,61 @@ class _GenerarPreguntarState extends State<GenerarPreguntar> {
           iconTheme: const IconThemeData(color: Colors.black87),
           centerTitle: true,
         ),
-        body: Background(
-          child: Column(
-            children: [
-              const SizedBox(height: 15),
-              // const Text(
-              //   'Pregunta?',
-              //   style: TextStyle(
-              //     fontSize: 20,
-              //     color: Colors.black,
-              //   ),
-              // ),
-              const SizedBox(height: 10),
-              // Padding(
-              //   padding: const EdgeInsets.all(16.0),
-              //   child: Text(
-              //     currentQuestion.pregunta,
-              //     style: const TextStyle(
-              //       color: Colors.black,
-              //       fontSize: 24,
-              //     ),
-              //   ),
-              // ),
-              widget.arguments.ctg == 'abecedario'
-                  ? CachedNetworkImage(
+        body: Column(
+          children: [
+            const SizedBox(height: 15),
+            // const Text(
+            //   'Pregunta?',
+            //   style: TextStyle(
+            //     fontSize: 20,
+            //     color: Colors.black,
+            //   ),
+            // ),
+            const SizedBox(height: 10),
+            // Padding(
+            //   padding: const EdgeInsets.all(16.0),
+            //   child: Text(
+            //     currentQuestion.pregunta,
+            //     style: const TextStyle(
+            //       color: Colors.black,
+            //       fontSize: 24,
+            //     ),
+            //   ),
+            // ),
+            widget.arguments.ctg == 'abecedario'
+                ? CachedNetworkImage(
+                    imageUrl: currentQuestion.imagen,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => const CircularProgressIndicator(),
+                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                  )
+                : Expanded(
+                    child: CachedNetworkImage(
                       imageUrl: currentQuestion.imagen,
                       fit: BoxFit.cover,
-                      placeholder: (context, url) => const CircularProgressIndicator(),
+                      placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
                       errorWidget: (context, url, error) => const Icon(Icons.error),
-                    )
-                  : Expanded(
-                      child: CachedNetworkImage(
-                        imageUrl: currentQuestion.imagen,
-                        fit: BoxFit.cover,
-                        placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-                        errorWidget: (context, url, error) => const Icon(Icons.error),
-                      ),
                     ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Card(
-                    elevation: 2,
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: ListView.builder(
-                        itemBuilder: (context, index) {
-                          final answer = currentQuestion.respuestas[index];
-                          return newMethod1(answer, currentQuestion, context, index);
-                        },
-                        itemCount: currentQuestion.respuestas.length,
-                      ),
+                  ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Card(
+                  elevation: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: ListView.builder(
+                      itemBuilder: (context, index) {
+                        final answer = currentQuestion.respuestas[index];
+                        return newMethod1(answer, currentQuestion, context, index);
+                      },
+                      itemCount: currentQuestion.respuestas.length,
                     ),
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       );
     }

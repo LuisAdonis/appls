@@ -148,11 +148,9 @@ class _EvaluacionScreenState extends State<EvaluacionScreen> {
           // : Container(),
         ],
       ),
-      body: Background(
-        child: SingleChildScrollView(
-          child: Center(
-            child: showTodoList(),
-          ),
+      body: SingleChildScrollView(
+        child: Center(
+          child: showTodoList(),
         ),
       ),
     );
