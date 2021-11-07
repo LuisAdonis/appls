@@ -5,6 +5,7 @@ import 'package:appls/models/dbdata_model.dart';
 import 'package:appls/service/audio.dart';
 import 'package:appls/shareprefenrences/sharepreferences.dart';
 import 'package:appls/ui/widget/background.dart';
+import 'package:appls/ui/widget/griditem.dart';
 import 'package:faker/faker.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,17 @@ class _EvaluacionScreenState extends State<EvaluacionScreen> {
   late Query _todoQuery;
   late List<DbDatosModel> _todoList;
   final presf = SPUsuarios();
+  List listimag = [
+    "assets/menu/byscar.png",
+    "assets/menu/mesimg.png",
+    "assets/menu/numerossinfondo.png",
+    "assets/menu/byscar.png",
+    "assets/menu/ciudades.png",
+    "assets/menu/continente.png",
+    "assets/menu/config1.png",
+    "assets/menu/byscar.png",
+    "assets/menu/byscar.png",
+  ];
   @override
   void initState() {
     super.initState();
@@ -55,46 +67,70 @@ class _EvaluacionScreenState extends State<EvaluacionScreen> {
         ),
         itemCount: _todoList.length,
         itemBuilder: (BuildContext context, int index) {
-          return Card(
-            elevation: 2,
-            borderOnForeground: false,
-            child: InkWell(
-              onTap: () {
-                if (presf.audio) {
-                  AudioLS().speak("${_todoList[index].nombre}");
-                }
+          return singleMyCourse1(
+            title: _todoList[index].nombre!.toUpperCase().replaceAll("-", " ").replaceAll("_", " "),
+            image: listimag[index],
+            type: "",
+            status: "Running",
+            lado: false,
+            startColor: '#738AE6',
+            endColor: '#5C5EDD',
+            ontap: () {
+              if (presf.audio) {
+                AudioLS().speak("${_todoList[index].nombre}");
+              }
 
-                Navigator.pushNamed(
-                  context,
-                  'GenerarEvaluacionr',
-                  arguments: DataArguments(
-                    nombreac: "${_todoList[index].nombre}".toUpperCase().replaceAll("-", " "),
-                    ctg: _todoList[index].nombre!,
-                    nodep: 'Categoriastest',
-                  ),
-                );
-              },
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  SizedBox(
-                    width: 100,
-                    height: 120,
-                    child: Image.asset(
-                      "assets/logosenas.png",
-                      color: Colors.deepPurple,
-                    ),
-                  ),
-                  Text(
-                    _todoList[index].nombre!.toUpperCase().replaceAll("-", " "),
-                    style: const TextStyle(fontSize: 18),
-                    textScaleFactor: 1.0,
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
+              Navigator.pushNamed(
+                context,
+                'GenerarEvaluacionr',
+                arguments: DataArguments(
+                  nombreac: "${_todoList[index].nombre}".toUpperCase().replaceAll("-", " "),
+                  ctg: _todoList[index].nombre!,
+                  nodep: 'Categoriastest',
+                ),
+              );
+            },
           );
+          //   return Card(
+          //     elevation: 2,
+          //     borderOnForeground: false,
+          //     child: InkWell(
+          //       onTap: () {
+          //         if (presf.audio) {
+          //           AudioLS().speak("${_todoList[index].nombre}");
+          //         }
+
+          //         Navigator.pushNamed(
+          //           context,
+          //           'GenerarEvaluacionr',
+          //           arguments: DataArguments(
+          //             nombreac: "${_todoList[index].nombre}".toUpperCase().replaceAll("-", " "),
+          //             ctg: _todoList[index].nombre!,
+          //             nodep: 'Categoriastest',
+          //           ),
+          //         );
+          //       },
+          //       child: Column(
+          //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //         children: [
+          //           // SizedBox(
+          //           //   width: 100,
+          //           //   height: 120,
+          //           //   child: Image.asset(
+          //           //     "assets/logosenas.png",
+          //           //     color: Colors.deepPurple,
+          //           //   ),
+          //           // ),
+          //           Text(
+          //             _todoList[index].nombre!.toUpperCase().replaceAll("-", " "),
+          //             style: const TextStyle(fontSize: 18),
+          //             textScaleFactor: 1.0,
+          //             textAlign: TextAlign.center,
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //   );
         },
       );
     } else {

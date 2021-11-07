@@ -193,7 +193,7 @@ class _ResultScreenState extends State<ResultScreen> {
                               onPressed: () {
                                 if (user != null) {
                                   DatabaseReference rootRef = FirebaseDatabase.instance.reference().child("EvaluacionRes/${user.userId}");
-                                  rootRef.push().set({
+                                  rootRef.child(widget.questions[0].categoria).push().set({
                                     "id": user.userId,
                                     "categoria": widget.questions[0].categoria,
                                     "preguntascorrectas": widget.score,

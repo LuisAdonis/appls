@@ -4,7 +4,6 @@ import 'package:appls/route/routers.dart';
 import 'package:appls/service/auth_service.dart';
 import 'package:appls/shareprefenrences/sharepreferences.dart';
 import 'package:appls/theme.dart';
-import 'package:appls/ui/lmkit/lenguajels_text.dart';
 import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +32,7 @@ void main() async {
         value: AuthService().user,
       ),
     ],
-    child: const LenguajeText(),
+    child: const MyApp(),
   ));
 }
 

@@ -4,6 +4,7 @@ import 'package:appls/models/data_arguments_model.dart';
 import 'package:appls/models/dbdata_model.dart';
 import 'package:appls/service/audio.dart';
 import 'package:appls/shareprefenrences/sharepreferences.dart';
+import 'package:appls/ui/widget/griditem.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,6 +24,23 @@ class _DBDataCategoriaState extends State<DBDataCategoria> {
   late Query _todoQuery;
   late List<DbDatosModel> _todoList;
   final presf = SPUsuarios();
+  List listimag = [
+    "assets/menu/abecedarioaslsinfondo.png",
+    "assets/menu/byscar.png",
+    "assets/menu/personasorda.png",
+    "assets/menu/ciudades.png",
+    "assets/menu/config1.png",
+    "assets/menu/continente.png",
+    "assets/menu/calendariosdl.png",
+    "assets/menu/byscar.png",
+    "assets/menu/mesimg.png",
+    "assets/menu/numerossinfondo.png",
+    "assets/menu/byscar.png",
+    "assets/menu/byscar.png",
+    "assets/menu/byscar.png",
+    "assets/menu/byscar.png",
+    "assets/menu/byscar.png",
+  ];
   @override
   void initState() {
     super.initState();
@@ -66,41 +84,69 @@ class _DBDataCategoriaState extends State<DBDataCategoria> {
         ),
         itemCount: _todoList.length,
         itemBuilder: (BuildContext context, int index) {
-          return Card(
-            elevation: 2,
-            borderOnForeground: false,
-            child: InkWell(
-              onTap: () {
-                if (presf.audio) {
-                  AudioLS().speak("${_todoList[index].nombre}");
-                }
-                Navigator.pushNamed(
-                  context,
-                  'DBData',
-                  arguments: DataArguments(
-                    nombreac: "${_todoList[index].nombre}".toUpperCase().replaceAll("-", " "),
-                    ctg: _todoList[index].nombre!,
-                    nodep: 'Categorias',
-                  ),
-                );
-              },
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  SizedBox(
-                    width: 100,
-                    height: 120,
-                    child: Image.asset("assets/logosenas.png"),
-                  ),
-                  Text(
-                    _todoList[index].nombre!.toUpperCase().replaceAll("-", " "),
-                    style: const TextStyle(fontSize: 20),
-                    textScaleFactor: 1.0,
-                  ),
-                ],
-              ),
-            ),
+          return singleMyCourse1(
+            title: _todoList[index].nombre!.toUpperCase().replaceAll("-", " ").replaceAll("_", " "),
+            image: listimag[index],
+            type: "",
+            status: "Running",
+            lado: false,
+            startColor: '#738AE6',
+            endColor: '#5C5EDD',
+            ontap: () {
+              if (presf.audio) {
+                AudioLS().speak("${_todoList[index].nombre}");
+              }
+              Navigator.pushNamed(
+                context,
+                'DBData',
+                arguments: DataArguments(
+                  nombreac: "${_todoList[index].nombre}".toUpperCase().replaceAll("-", " "),
+                  ctg: _todoList[index].nombre!,
+                  nodep: 'Categorias',
+                ),
+              );
+            },
           );
+          //   return Card(
+          //     elevation: 2,
+          //     borderOnForeground: false,
+          //     child: InkWell(
+          //       onTap: () {
+          //         if (presf.audio) {
+          //           AudioLS().speak("${_todoList[index].nombre}");
+          //         }
+          //         Navigator.pushNamed(
+          //           context,
+          //           'DBData',
+          //           arguments: DataArguments(
+          //             nombreac: "${_todoList[index].nombre}".toUpperCase().replaceAll("-", " "),
+          //             ctg: _todoList[index].nombre!,
+          //             nodep: 'Categorias',
+          //           ),
+          //         );
+          //       },
+          //       child: Column(
+          //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //         children: [
+          //           SizedBox(
+          //             width: 100,
+          //             height: 120,
+          //             child: Image.asset(listimag[index]),
+          //           ),
+          //           Text(
+          //             _todoList[index].nombre!.toUpperCase().replaceAll("-", " "),
+          //             style: const TextStyle(fontSize: 18),
+          //             textScaleFactor: 1.0,
+          //           ),
+          //           // Text(
+          //           //   "a${_todoList[index].imagen}",
+          //           //   style: const TextStyle(fontSize: 20),
+          //           //   textScaleFactor: 1.0,
+          //           // ),
+          //         ],
+          //       ),
+          //     ),
+          //   );
         },
       );
     } else {

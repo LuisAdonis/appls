@@ -10,6 +10,7 @@ import 'package:appls/service/audio.dart';
 import 'package:appls/shareprefenrences/sharepreferences.dart';
 import 'package:appls/ui/widget/background.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -152,6 +153,8 @@ class _GenerarPreguntarState extends State<GenerarPreguntar> {
       if (presf.audio) {
         AudioLS().speak("${currentQuestion.pregunta} ");
       }
+      Size size = MediaQuery.of(context).size;
+
       return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
@@ -164,59 +167,132 @@ class _GenerarPreguntarState extends State<GenerarPreguntar> {
           iconTheme: const IconThemeData(color: Colors.black87),
           centerTitle: true,
         ),
-        body: Column(
+        body: Stack(
           children: [
-            const SizedBox(height: 15),
-            // const Text(
-            //   'Pregunta?',
-            //   style: TextStyle(
-            //     fontSize: 20,
-            //     color: Colors.black,
-            //   ),
-            // ),
-            const SizedBox(height: 10),
-            // Padding(
-            //   padding: const EdgeInsets.all(16.0),
-            //   child: Text(
-            //     currentQuestion.pregunta,
-            //     style: const TextStyle(
-            //       color: Colors.black,
-            //       fontSize: 24,
-            //     ),
-            //   ),
-            // ),
-            widget.arguments.ctg == 'abecedario'
-                ? CachedNetworkImage(
-                    imageUrl: currentQuestion.imagen,
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => const CircularProgressIndicator(),
-                    errorWidget: (context, url, error) => const Icon(Icons.error),
-                  )
-                : Expanded(
-                    child: CachedNetworkImage(
-                      imageUrl: currentQuestion.imagen,
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-                      errorWidget: (context, url, error) => const Icon(Icons.error),
+            Positioned(
+              top: 30,
+              left: 20,
+              child: Container(
+                height: size.height / 6,
+                width: size.height / 6,
+                decoration: const BoxDecoration(shape: BoxShape.circle, color: bubbleColor),
+              ),
+            ),
+            Positioned(
+              bottom: 30,
+              right: 20,
+              child: Container(
+                height: size.height / 7,
+                width: size.height / 7,
+                decoration: const BoxDecoration(shape: BoxShape.circle, color: bubbleColor),
+              ),
+            ),
+            Positioned(
+              bottom: 234,
+              left: 50,
+              child: Container(
+                height: size.height / 4.5,
+                width: size.height / 4.5,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: bubbleColor,
+                ),
+              ),
+            ),
+            Positioned(
+              top: 80,
+              right: 0,
+              child: Container(
+                height: size.height / 5,
+                width: size.height / 9,
+                decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(100),
+                      bottomLeft: Radius.circular(100),
                     ),
+                    color: bubbleColor),
+              ),
+            ),
+            Positioned(
+              top: 230,
+              right: 30,
+              child: Container(
+                height: size.height / 10,
+                width: size.height / 10,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: bubbleColor,
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 24,
+              left: 0,
+              child: Container(
+                height: size.height / 5,
+                width: size.height / 5,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(80),
+                    topRight: Radius.circular(130),
+                    bottomRight: Radius.circular(80),
                   ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Card(
-                  elevation: 2,
+                  color: bubbleColor,
+                ),
+              ),
+            ),
+            Column(
+              children: [
+                const SizedBox(height: 15),
+                // const Text(
+                //   'Pregunta?',
+                //   style: TextStyle(
+                //     fontSize: 20,
+                //     color: Colors.black,
+                //   ),
+                // ),
+                const SizedBox(height: 10),
+                // Padding(
+                //   padding: const EdgeInsets.all(16.0),
+                //   child: Text(
+                //     currentQuestion.pregunta,
+                //     style: const TextStyle(
+                //       color: Colors.black,
+                //       fontSize: 24,
+                //     ),
+                //   ),
+                // ),
+                widget.arguments.ctg == 'abecedario'
+                    ? CachedNetworkImage(
+                        imageUrl: currentQuestion.imagen,
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) => const CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => const Icon(Icons.error),
+                      )
+                    : Expanded(
+                        child: CachedNetworkImage(
+                          imageUrl: currentQuestion.imagen,
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                          errorWidget: (context, url, error) => const Icon(Icons.error),
+                        ),
+                      ),
+                Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: ListView.builder(
-                      itemBuilder: (context, index) {
-                        final answer = currentQuestion.respuestas[index];
-                        return newMethod1(answer, currentQuestion, context, index);
-                      },
-                      itemCount: currentQuestion.respuestas.length,
+                    padding: const EdgeInsets.all(8.0),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: ListView.builder(
+                        itemBuilder: (context, index) {
+                          final answer = currentQuestion.respuestas[index];
+                          return newMethod1(answer, currentQuestion, context, index);
+                        },
+                        itemCount: currentQuestion.respuestas.length,
+                      ),
                     ),
                   ),
                 ),
-              ),
+              ],
             ),
           ],
         ),
@@ -261,11 +337,12 @@ class _GenerarPreguntarState extends State<GenerarPreguntar> {
         });
       },
       child: Container(
-        margin: EdgeInsets.only(top: 20.0),
-        padding: EdgeInsets.all(20.0),
+        margin: const EdgeInsets.only(top: 20.0),
+        padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 7, bottom: 7),
         decoration: BoxDecoration(
           border: Border.all(color: getTheRightColor()),
           borderRadius: BorderRadius.circular(15),
+          color: Colors.white,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

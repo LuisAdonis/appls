@@ -65,9 +65,7 @@ class _LenguahelmScreenState extends State<LenguahelmScreen> {
 //                       }
 //                     }
     if (stado) {
-      if (presf.audio) {
-        AudioLS().speak(data.toString().replaceAll(",", "").replaceAll("[", "").replaceAll("]", ""));
-      }
+      AudioLS().speak(data.toString().replaceAll(",", "").replaceAll("[", "").replaceAll("]", "").replaceAll(" ", ""));
     }
     final args = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
     return Scaffold(
@@ -141,7 +139,7 @@ class _LenguahelmScreenState extends State<LenguahelmScreen> {
                             ),
                           ],
                         ),
-                        Text(data.toString().replaceAll(",", "").replaceAll("[", "").replaceAll("]", "")),
+                        Text(data.toString().replaceAll(",", "").replaceAll("[", "").replaceAll("]", "").replaceAll(" ", "")),
                       ],
                     ),
                   ),

@@ -61,7 +61,6 @@ class _HomePageState extends State<HomePage> {
       print('Message clicked! $message');
     });
     super.initState();
-    asaa();
   }
 
   void changeIndex(DrawerIndex drawerIndexdata) {
@@ -103,11 +102,5 @@ class _HomePageState extends State<HomePage> {
         //we replace screen view as we need on navigate starting screens like MyHomePage, HelpScreen, FeedbackScreen, etc...
       ),
     );
-  }
-
-  Future<void> asaa() async {
-    await FirebaseAuth.instance.currentUser!.reload().then((value) {
-      print("object");
-    });
   }
 }
