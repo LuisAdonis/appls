@@ -24,7 +24,7 @@ class _EstudiarScreenState extends State<EstudiarScreen> {
         iconTheme: const IconThemeData(color: Colors.black87),
         centerTitle: true,
         title: const Text(
-          'Menu Estudiar',
+          'Menú Estudiar',
           style: TextStyle(
             color: Colors.black87,
             fontSize: 28,

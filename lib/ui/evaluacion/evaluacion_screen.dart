@@ -149,7 +149,7 @@ class _EvaluacionScreenState extends State<EvaluacionScreen> {
         systemOverlayStyle: SystemUiOverlayStyle.light,
         iconTheme: const IconThemeData(color: Colors.black87),
         title: const Text(
-          "Menu Evaluación",
+          "Menú Evaluación",
           style: TextStyle(
             color: Colors.black87,
           ),

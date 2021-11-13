@@ -2,6 +2,7 @@ import 'package:appls/const.dart';
 import 'package:appls/models/user_model.dart';
 import 'package:appls/route/routers.dart';
 import 'package:appls/service/auth_service.dart';
+import 'package:appls/service/playerprovider.dart';
 import 'package:appls/shareprefenrences/sharepreferences.dart';
 import 'package:appls/theme.dart';
 import 'package:camera/camera.dart';
@@ -30,6 +31,9 @@ void main() async {
         initialData: null,
         catchError: (_, op) => null,
         value: AuthService().user,
+      ),
+      ChangeNotifierProvider<PlayerProvider>(
+        create: (_) => PlayerProvider(),
       ),
     ],
     child: const MyApp(),

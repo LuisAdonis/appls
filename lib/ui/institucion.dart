@@ -46,15 +46,15 @@ class _InstitucionScreenState extends State<InstitucionScreen> {
                       children: const <Widget>[
                         Text(
                           "UNIDAD EDUCATIVA FISCOMISIONAL “JUAN MONTALVO”",
-                          style: TextStyle(fontSize: 32),
+                          style: TextStyle(fontSize: 25),
                         ),
                         Text(
                           "DRA. EDELMARY MUÑOZ AVEIGA",
-                          style: TextStyle(fontSize: 19, color: Colors.grey),
+                          style: TextStyle(fontSize: 14, color: Colors.grey),
                         ),
                         Text(
                           "MG rectora",
-                          style: TextStyle(fontSize: 19, color: Colors.grey),
+                          style: TextStyle(fontSize: 11, color: Colors.grey),
                         ),
                         SizedBox(
                           height: 40,

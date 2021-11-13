@@ -1,7 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.devel.appls">
-   <application
+  <uses-permission android:name="android.permission.INTERNET" />
+ <application
         android:label="App Lenguaje de señas"
+        android:usesCleartextTraffic="true"
         android:icon="@drawable/logosenas">
         <activity
             android:name=".MainActivity"

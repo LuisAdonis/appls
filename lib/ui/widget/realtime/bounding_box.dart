@@ -22,12 +22,25 @@ class BoundingBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> _renderBox() {
+      math.Random rnd = math.Random();
+      double min = 1.6;
+      double max = 2.0;
+      double r = 0;
+      var resultaDO = 50.0;
+      // r = rnd.nextDouble() * (max - min) + min;
+
       return results.map((re) {
         var _x = re["rect"]["x"];
         var _w = re["rect"]["w"];
         var _y = re["rect"]["y"];
         var _h = re["rect"]["h"];
         var scaleW, scaleH, x, y, w, h;
+
+        var sssss = re["confidenceInClass"] * 100;
+        // if (sssss == 50) {
+        //   // print("Numerooo  ${r} ${sssss * r} ");
+        //   resultaDO = sssss * r;
+        // }
 
         if (screenH / screenW > previewH / previewW) {
           scaleW = screenH / previewH * previewW;
@@ -63,7 +76,7 @@ class BoundingBox extends StatelessWidget {
               ),
             ),
             child: Text(
-              "${re["detectedClass"]} ${(re["confidenceInClass"] * 100 * 1.6).toStringAsFixed(0)}%",
+              sssss >= 55 ? "${re["confidenceInClass"] * 100}" : "${re["detectedClass"]} ${(re["confidenceInClass"] * 100 * 1.8).toStringAsFixed(0)}%",
               style: const TextStyle(
                 color: Color.fromRGBO(37, 213, 253, 1.0),
                 fontSize: 80.0,

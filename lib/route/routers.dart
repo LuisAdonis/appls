@@ -12,6 +12,9 @@ import 'package:appls/ui/evaluacion/result.dart';
 import 'package:appls/ui/home_page.dart';
 import 'package:appls/ui/institucion.dart';
 import 'package:appls/ui/lmkit/lenguajelm_screen.dart';
+import 'package:appls/ui/lmkit/libros_disponibles.dart';
+import 'package:appls/ui/lmkit/opciones.dart';
+import 'package:appls/ui/lmkit/reproductoraudio.dart';
 import 'package:appls/ui/logins.dart';
 import 'package:appls/ui/register_page.dart';
 import 'package:appls/ui/splash_screen.dart';
@@ -49,6 +52,14 @@ class Routers {
       case 'Institución':
         return _pageTranst(settings: settings, child: const InstitucionScreen(), type: PageTransitionType.rightToLeft);
       case 'Lenguaje ML':
+        return _pageTranst(settings: settings, child: const OpcvionesF(), type: PageTransitionType.rightToLeft);
+      case 'Libreria':
+        final a = settings.arguments as DataArguments;
+        return _pageTranst(settings: settings, child: LibreriaDisponible(arguments: a), type: PageTransitionType.rightToLeft);
+      case 'ReproductorAudio':
+        final a = settings.arguments as DataArguments1;
+        return _pageTranst(settings: settings, child: ReproductorAudios(arguments: a), type: PageTransitionType.rightToLeft);
+      case 'LenguajeCamara':
         return _pageTranst(settings: settings, child: const LenguahelmScreen(), type: PageTransitionType.rightToLeft);
       case 'Evaluación':
         return _pageTranst(settings: settings, child: const EvaluacionScreen(), type: PageTransitionType.rightToLeft);
