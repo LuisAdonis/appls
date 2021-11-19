@@ -1,7 +1,5 @@
 import 'package:appls/models/chapter_model.dart';
 import 'package:appls/models/libro_model.dart';
-import 'package:appls/models/models/Album.dart';
-import 'package:appls/models/models/Track.dart';
 import 'package:appls/service/playerprovider.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
@@ -13,12 +11,13 @@ class TrackPlayButton extends StatelessWidget {
   final Function? onPressed;
   final LibroModel? cai;
 
-  TrackPlayButton({
+  const TrackPlayButton({
+    Key? key,
     this.track,
     required this.index,
     this.onPressed,
     this.cai,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

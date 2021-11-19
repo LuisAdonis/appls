@@ -1,6 +1,6 @@
-import 'package:appls/models/models/Track.dart';
-
 import 'Media.dart';
+import 'Track.dart';
+
 part 'Album.g.dart';
 
 class Album {

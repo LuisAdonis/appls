@@ -72,6 +72,7 @@ Future fetchSongDetails(songId) async {
 
   has_320 = getMain[songId]["more_info"]["320kbps"];
   // kUrl = await DesPlugin.decrypt(key, getMain[songId]["more_info"]["encrypted_media_url"]);
+  // ignore: avoid_print
   print(getMain[songId]["more_info"]["encrypted_media_url"]);
   kUrl = "a";
   rawkUrl = kUrl;
@@ -79,6 +80,7 @@ Future fetchSongDetails(songId) async {
   final client = http.Client();
   final request = http.Request('HEAD', Uri.parse(kUrl))..followRedirects = false;
   final response = await client.send(request);
+  // ignore: avoid_print
   print(response);
   kUrl = (response.headers['location'])!;
   artist = (getMain[songId]["more_info"]["artistMap"]["primary_artists"][0]["name"]).toString().replaceAll("&quot;", "\"").replaceAll("&#039;", "'").replaceAll("&amp;", "&");

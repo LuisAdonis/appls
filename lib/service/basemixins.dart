@@ -10,16 +10,13 @@ mixin BaseMixins {
       return isTablet;
     } else if (width < 370) {
       return isSmallPhone;
-    } else
+    } else {
       return isPhone;
+    }
   }
 
   activeColor(BuildContext context, check, {required Color iconColor}) {
-    return check
-        ? Theme.of(context).primaryColor
-        : iconColor == null
-            ? Theme.of(context).colorScheme.secondary
-            : iconColor;
+    return check ? Theme.of(context).primaryColor : iconColor;
   }
 
   //List Shuffle

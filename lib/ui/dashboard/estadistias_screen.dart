@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class EstadistiasScreen extends StatefulWidget {
@@ -22,6 +21,7 @@ class _EstadistiasScreenState extends State<EstadistiasScreen> {
 
   String cat = "";
 
+  // ignore: prefer_typing_uninitialized_variables
   var _selectedItem;
   late List<DropdownMenuItem<_PieData>> _dropdownMenuItems;
   @override
@@ -42,7 +42,6 @@ class _EstadistiasScreenState extends State<EstadistiasScreen> {
   }
 
   List<_SalesData> data = [];
-  String _value = "";
   List<DropdownMenuItem<_PieData>> buildDropDownMenuItems(List listItems) {
     List<DropdownMenuItem<_PieData>> items = [];
     for (_PieData listItem in listItems) {

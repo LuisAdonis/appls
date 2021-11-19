@@ -59,7 +59,7 @@ class AuthService {
       await _auth.currentUser!.updatePhotoURL(
           "https://firebasestorage.googleapis.com/v0/b/app-lsec.appspot.com/o/85622928-icono-de-perfil-de-avatar-predeterminado-marcador-de-posici%C3%B3n-de-foto-gris-vectores-de-ilustraciones.jpg?alt=media&token=ac3bf05d-6b29-4ab8-97d1-b21934ccadf4");
 
-      User? user = await _auth.currentUser;
+      User? user = _auth.currentUser;
       return _userFromFirebase(user!);
     } catch (e) {
       // ignore: avoid_print

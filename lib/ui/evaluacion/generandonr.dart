@@ -8,9 +8,7 @@ import 'package:appls/models/question.dart';
 import 'package:appls/models/result_arguments_model.dart';
 import 'package:appls/service/audio.dart';
 import 'package:appls/shareprefenrences/sharepreferences.dart';
-import 'package:appls/ui/widget/background.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -161,7 +159,7 @@ class _GenerarPreguntarState extends State<GenerarPreguntar> {
           elevation: 0.0,
           title: Text(
             currentQuestion.pregunta,
-            style: TextStyle(color: Colors.black),
+            style: const TextStyle(color: Colors.black),
           ),
           systemOverlayStyle: SystemUiOverlayStyle.light,
           iconTheme: const IconThemeData(color: Colors.black87),

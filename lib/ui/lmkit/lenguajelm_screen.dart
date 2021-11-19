@@ -33,6 +33,9 @@ class _LenguahelmScreenState extends State<LenguahelmScreen> {
     await Tflite.loadModel(
       model: "assets/tflite/detect.tflite",
       labels: "assets/tflite/labelmap.txt",
+      numThreads: 1, // defaults to 1
+      isAsset: true, // defaults to true, set to false to load resources outside assets
+      useGpuDelegate: false,
     );
   }
 
@@ -96,13 +99,20 @@ class _LenguahelmScreenState extends State<LenguahelmScreen> {
                       }
                     }
                   },
-                  child: BoundingBox(
-                    _recognitions,
-                    math.max(_imageHeight, _imageWidth),
-                    math.min(_imageHeight, _imageWidth),
-                    screen.height,
-                    screen.width,
-                  ),
+                  // child: Column(
+                  //   children: [
+                  //     _contentWidget(),
+                  //   ],
+                  // ),
+                  child: false
+                      ? _contentWidget()
+                      : BoundingBox(
+                          _recognitions,
+                          math.max(_imageHeight, _imageWidth),
+                          math.min(_imageHeight, _imageWidth),
+                          screen.height,
+                          screen.width,
+                        ),
                 ),
                 Positioned(
                   bottom: 0,
@@ -189,5 +199,62 @@ class _LenguahelmScreenState extends State<LenguahelmScreen> {
         ],
       ),
     );
+  }
+
+  Widget _contentWidget() {
+    var _width = MediaQuery.of(context).size.width;
+    var _padding = 20.0;
+    var _labelWitdth = 150.0;
+    var _labelConfidence = 30.0;
+    var _barWitdth = _width - _labelWitdth - _labelConfidence - _padding * 2.0;
+
+    if (_recognitions.length > 0) {
+      return Container(
+        height: 150,
+        child: ListView.builder(
+          itemCount: _recognitions.length,
+          itemBuilder: (context, index) {
+            if (_recognitions.length > index) {
+              print(_recognitions[index]['label']);
+              return Container(
+                height: 40,
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.only(left: _padding, right: _padding),
+                      width: _labelWitdth,
+                      child: Text(
+                        _recognitions[index]['label'],
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    Container(
+                      width: _barWitdth,
+                      child: LinearProgressIndicator(
+                        backgroundColor: Colors.transparent,
+                        value: _recognitions[index]['confidence'],
+                      ),
+                    ),
+                    Container(
+                      width: _labelConfidence,
+                      child: Text(
+                        (_recognitions[index]['confidence'] * 100).toStringAsFixed(0) + '%',
+                        maxLines: 1,
+//                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            } else {
+              return Container();
+            }
+          },
+        ),
+      );
+    } else {
+      return Text('');
+    }
   }
 }

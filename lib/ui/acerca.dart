@@ -1,5 +1,3 @@
-import 'package:appls/ui/utils/hexcolor.dart';
-import 'package:appls/ui/widget/griditem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,7 +20,7 @@ class AcercaScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Text(
                   "UNIVERSIDAD LAICA ELOY ALFARO DE MANABÍ\nDIRECCIÓN DE POSGRADO, COOPERACIÓN Y RELACIONES \nINTERNACIONALES\n",
                   textAlign: TextAlign.center,
@@ -36,7 +34,7 @@ class AcercaScreen extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Text(
                   "Tema:",
                   textAlign: TextAlign.center,
@@ -50,7 +48,7 @@ class AcercaScreen extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Text(
                   "Herramienta para la comunicación de lengua de señas con Deep Learning en la Unidad Educativa Juan Montalvo",
                   textAlign: TextAlign.center,
@@ -65,7 +63,7 @@ class AcercaScreen extends StatelessWidget {
               const SizedBox(
                 height: 25,
               ),
-              Container(
+              SizedBox(
                 // color: Colors.teal,
                 width: double.infinity,
                 child: Padding(
@@ -110,7 +108,7 @@ class AcercaScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
+              SizedBox(
                 // color: Colors.teal,
                 width: double.infinity,
                 child: Padding(
@@ -195,7 +193,7 @@ class AcercaScreen extends StatelessWidget {
                       width: 20,
                     ),
                     Expanded(
-                      child: Container(
+                      child: SizedBox(
                         // color: Colors.teal,
                         height: 220,
                         child: Column(
@@ -289,7 +287,7 @@ class AcercaScreen extends StatelessWidget {
                       width: 20,
                     ),
                     Expanded(
-                      child: Container(
+                      child: SizedBox(
                         // color: Colors.teal,
                         height: 220,
                         child: Column(

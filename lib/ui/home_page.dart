@@ -3,7 +3,6 @@ import 'package:appls/ui/dashboard/estadistias_screen.dart';
 import 'package:appls/ui/logins.dart';
 import 'package:appls/ui/register_page.dart';
 import 'package:appls/ui/widget/drawer_widget.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 

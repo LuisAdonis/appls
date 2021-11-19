@@ -1,10 +1,7 @@
 import 'dart:async';
 
-import 'package:appls/models/audio_libro_models.dart';
 import 'package:appls/models/chapter_model.dart';
 import 'package:appls/models/data_arguments_model.dart';
-import 'package:appls/models/libro_model.dart';
-import 'package:appls/models/models/Track.dart';
 import 'package:appls/ui/utils/basescafflod.dart';
 import 'package:appls/ui/utils/tracklite.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -25,7 +22,7 @@ class _ReproductorAudiosState extends State<ReproductorAudios> {
   late List<Chapter> _todoList;
   late StreamSubscription<Event> _onTodoAddedSubscription;
   late StreamSubscription<Event> _onTodoChangedSubscription;
-  final ScrollController scrollController = new ScrollController();
+  final ScrollController scrollController = ScrollController();
   @override
   void initState() {
     super.initState();
@@ -52,6 +49,7 @@ class _ReproductorAudiosState extends State<ReproductorAudios> {
 
   onEntryChanged(Event event) {
     var oldEntry = _todoList.singleWhere((entry) {
+      // ignore: unrelated_type_equality_checks
       return entry.cap == event.snapshot.key;
     });
 
@@ -69,13 +67,14 @@ class _ReproductorAudiosState extends State<ReproductorAudios> {
         "2": "2sa",
         "3": "2aa",
       },
-      "id": "$d",
+      "id": d,
       "descripcion": "dad ad adsadfdgfdgs fgdsgf asfdgsfdg ",
       "imagen": "afd",
       "nombre": "asafd asfda",
       "url": "aasdasdd",
     };
     _database.reference().child("AudiosLibros").child(d).set(data).whenComplete(() {
+      // ignore: avoid_print
       print("object");
     });
   }
@@ -90,8 +89,8 @@ class _ReproductorAudiosState extends State<ReproductorAudios> {
         iconTheme: const IconThemeData(color: Colors.black87),
         centerTitle: true,
         title: Text(
-          "${widget.arguments.nodep.nombrelibro}",
-          style: TextStyle(color: Colors.black),
+          widget.arguments.nodep.nombrelibro,
+          style: const TextStyle(color: Colors.black),
         ),
         actions: const [
           // IconButton(

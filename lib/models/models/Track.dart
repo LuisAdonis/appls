@@ -1,8 +1,6 @@
 // ignore: file_names
 import 'package:firebase_database/firebase_database.dart';
 
-import 'Media.dart';
-
 part 'Track.g.dart';
 
 class Track {

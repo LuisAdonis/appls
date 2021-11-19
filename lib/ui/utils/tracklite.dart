@@ -1,7 +1,5 @@
 import 'package:appls/models/chapter_model.dart';
 import 'package:appls/models/libro_model.dart';
-import 'package:appls/models/models/Album.dart';
-import 'package:appls/models/models/Track.dart';
 import 'package:appls/service/playerprovider.dart';
 import 'package:appls/ui/utils/trackplay.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
@@ -16,11 +14,12 @@ class TrackTile extends StatefulWidget {
   final List<Chapter>? tracks;
   final LibroModel? capi;
   const TrackTile({
+    Key? key,
     this.track,
     this.index,
     this.tracks,
     this.capi,
-  });
+  }) : super(key: key);
   @override
   _TrackTileState createState() => _TrackTileState();
 }
@@ -87,7 +86,7 @@ class _TrackTileState extends State<TrackTile> {
               trailing: TrackPlayButton(
                 track: widget.track,
                 index: widget.index!,
-                cai:widget.capi,
+                cai: widget.capi,
               ),
             ),
           ),

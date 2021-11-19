@@ -1,7 +1,6 @@
 import 'package:appls/models/chapter_model.dart';
 import 'package:appls/models/libro_model.dart';
 import 'package:appls/models/models/Album.dart';
-import 'package:appls/models/models/Track.dart';
 import 'package:appls/service/basemixins.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/cupertino.dart';
@@ -64,7 +63,10 @@ class PlayerProvider extends ChangeNotifier with BaseMixins {
   playOrPause() async {
     try {
       await player.playOrPause();
-    } catch (t) {}
+    } catch (t) {
+      // ignore: avoid_print
+      print(t.toString());
+    }
   }
 
   isFirstTrack() {
@@ -78,7 +80,8 @@ class PlayerProvider extends ChangeNotifier with BaseMixins {
   /// Next Track:
   /// Action will be false if used with playlistAudioFinished listener
   /// A track can be next by action or on playlistAudioFinished
-  next({action: true}) {
+  next({action = true}) {
+    // ignore: avoid_print
     print("objectsssssssssssssss");
     int next = _currentIndex + 1;
     if (!action && _loopMode && isLastTrack(next) && _loopPlaylist) {
@@ -124,6 +127,7 @@ class PlayerProvider extends ChangeNotifier with BaseMixins {
   bool _shuffled = false;
   bool get shuffled => _shuffled;
   handleShuffle() {
+    // ignore: avoid_print
     print("111object");
 
     _shuffled = !_shuffled;
@@ -131,7 +135,7 @@ class PlayerProvider extends ChangeNotifier with BaseMixins {
     _beforeShuffling = _currentAlbum;
     var shuffledTracks = shuffle(tracks!);
     if (_shuffled) {
-      Album album = new Album(
+      Album album = Album(
         _currentAlbum.id,
         _currentAlbum.title,
         _currentAlbum.content,
@@ -149,6 +153,7 @@ class PlayerProvider extends ChangeNotifier with BaseMixins {
   ///
   play(index) async {
     // player.stop();
+    // ignore: avoid_print
     print("111object");
     try {
       _currentTrack = _currentAlbum.tracks![index];
@@ -218,6 +223,7 @@ class PlayerProvider extends ChangeNotifier with BaseMixins {
         setPlaying(album, index);
       }
     } catch (t) {
+      // ignore: avoid_print
       print(t.toString());
       //mp3 unreachable
     }

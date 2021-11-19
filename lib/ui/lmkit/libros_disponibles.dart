@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:appls/models/data_arguments_model.dart';
 import 'package:appls/models/libro_model.dart';
 import 'package:appls/service/audio.dart';
@@ -20,8 +18,6 @@ class _LibreriaDisponibleState extends State<LibreriaDisponible> {
   final FirebaseDatabase _database = FirebaseDatabase.instance;
   late Query _todoQuery;
   late List<LibroModel> _libros;
-  late StreamSubscription<Event> _onTodoAddedSubscription;
-  late StreamSubscription<Event> _onTodoChangedSubscription;
   final presf = SPUsuarios();
   @override
   void initState() {
@@ -29,7 +25,7 @@ class _LibreriaDisponibleState extends State<LibreriaDisponible> {
 
     _libros = [];
     _todoQuery = _database.reference().child("AudiosLibros");
-    _onTodoAddedSubscription = _todoQuery.onChildAdded.listen(onEntryAdded);
+    _todoQuery.onChildAdded.listen(onEntryAdded);
   }
 
   onEntryAdded(Event event) {
@@ -74,7 +70,7 @@ class _LibreriaDisponibleState extends State<LibreriaDisponible> {
                 InkWell(
                   onTap: () {
                     if (presf.audio) {
-                      AudioLS().speak("${_libros[index].nombrelibro}");
+                      AudioLS().speak(_libros[index].nombrelibro);
                     }
                     Navigator.pushNamed(
                       context,
@@ -95,7 +91,7 @@ class _LibreriaDisponibleState extends State<LibreriaDisponible> {
                         children: [
                           Container(height: 4.0),
                           Text(
-                            "${_libros[index].nombrelibro}",
+                            _libros[index].nombrelibro,
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18.0,

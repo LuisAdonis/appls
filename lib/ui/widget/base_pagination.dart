@@ -6,7 +6,13 @@ class BasePagination extends StatelessWidget {
   final Function? method;
   final bool? loading;
 
-  BasePagination({this.scrollController, this.child, this.method, this.loading});
+  const BasePagination({
+    Key? key,
+    this.scrollController,
+    this.child,
+    this.method,
+    this.loading,
+  }) : super(key: key);
 
   bool onNotification(ScrollNotification notification) {
     if (notification is ScrollUpdateNotification) {

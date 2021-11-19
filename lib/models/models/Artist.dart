@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'package:appls/models/models/Album.dart';
 import 'package:appls/models/models/Media.dart';
 import 'package:firebase_database/firebase_database.dart';

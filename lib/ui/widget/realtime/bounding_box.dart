@@ -22,11 +22,6 @@ class BoundingBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> _renderBox() {
-      math.Random rnd = math.Random();
-      double min = 1.6;
-      double max = 2.0;
-      double r = 0;
-      var resultaDO = 50.0;
       // r = rnd.nextDouble() * (max - min) + min;
 
       return results.map((re) {
@@ -65,8 +60,8 @@ class BoundingBox extends StatelessWidget {
         return Positioned(
           left: math.max(0, x),
           top: math.max(0, y),
-          width: w,
-          height: h,
+          width: w * 0.75,
+          height: h * 0.75,
           child: Container(
             padding: const EdgeInsets.only(top: 5.0, left: 5.0),
             decoration: BoxDecoration(
@@ -75,13 +70,29 @@ class BoundingBox extends StatelessWidget {
                 width: 3.0,
               ),
             ),
-            child: Text(
-              sssss >= 55 ? "${re["confidenceInClass"] * 100}" : "${re["detectedClass"]} ${(re["confidenceInClass"] * 100 * 1.8).toStringAsFixed(0)}%",
-              style: const TextStyle(
-                color: Color.fromRGBO(37, 213, 253, 1.0),
-                fontSize: 80.0,
-                fontWeight: FontWeight.bold,
-              ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "${re["detectedClass"]}".toUpperCase(),
+                  style: const TextStyle(
+                    color: Color.fromRGBO(37, 213, 253, 1.0),
+                    fontSize: 50.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  sssss >= 55 ? "${re["confidenceInClass"] * 100}" : "${(re["confidenceInClass"] * 100 * 1.8).toStringAsFixed(0)}%",
+                  style: const TextStyle(
+                    color: Color.fromRGBO(37, 213, 253, 1.0),
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
           ),
         );
