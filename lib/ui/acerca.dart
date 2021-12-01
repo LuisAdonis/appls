@@ -50,7 +50,7 @@ class AcercaScreen extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Text(
-                  "Herramienta para la comunicación de lengua de señas con Deep Learning en la Unidad Educativa Juan Montalvo",
+                  "Herramienta para el aprendizaje y la comunicación de lengua de señas con Deep Learning en la Unidad Educativa Juan Montalvo",
                   textAlign: TextAlign.center,
                   style: GoogleFonts.quicksand(
                     textStyle: const TextStyle(
