@@ -22,7 +22,7 @@ class AcercaScreen extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Text(
-                  "UNIVERSIDAD LAICA ELOY ALFARO DE MANABÍ\nDIRECCIÓN DE POSGRADO, COOPERACIÓN Y RELACIONES \nINTERNACIONALES\n",
+                  "Universidad Laica Eloy Alfaro de Manabí \nDirección de Postgrado, Cooperación y Relaciones \nInternacionales\n",
                   textAlign: TextAlign.center,
                   style: GoogleFonts.quicksand(
                     textStyle: const TextStyle(
@@ -72,13 +72,22 @@ class AcercaScreen extends StatelessWidget {
                     elevation: 10,
                     child: Column(
                       children: [
-                        const SizedBox(
-                          height: 250,
-                          child: CircleAvatar(
-                            radius: 100,
-                            backgroundColor: Colors.white,
-                            backgroundImage: AssetImage('assets/yo.jpeg'),
-                          ),
+                        // const SizedBox(
+                        //   height: 250,
+                        //   child: CircleAvatar(
+                        //     radius: 90,
+                        //     backgroundColor: Colors.white,
+                        //     backgroundImage: AssetImage('assets/yo.jpeg'),
+                        //   ),
+                        // ),
+                        SizedBox(
+                          child: ClipOval(
+                              child: Image.asset(
+                            'assets/yo.jpeg',
+                            fit: BoxFit.fitHeight,
+                            width: 200.0,
+                            height: 200.0,
+                          )),
                         ),
                         Text(
                           'Ing. Pedro Anchundia Delgado',
@@ -117,13 +126,22 @@ class AcercaScreen extends StatelessWidget {
                     elevation: 10,
                     child: Column(
                       children: [
-                        const SizedBox(
-                          height: 250,
-                          child: CircleAvatar(
-                            radius: 100,
-                            backgroundColor: Colors.white,
-                            backgroundImage: AssetImage('assets/tutor.jpeg'),
-                          ),
+                        // const SizedBox(
+                        //   height: 250,
+                        //   child: CircleAvatar(
+                        //     radius: 100,
+                        //     backgroundColor: Colors.white,
+                        //     backgroundImage: AssetImage('assets/tutor.jpeg'),
+                        //   ),
+                        // ),
+                        SizedBox(
+                          child: ClipOval(
+                              child: Image.asset(
+                            'assets/tutor.jpeg',
+                            fit: BoxFit.fitHeight,
+                            width: 200.0,
+                            height: 200.0,
+                          )),
                         ),
                         Text(
                           'Ing. Jorge Pincay Ponce, PhD',
