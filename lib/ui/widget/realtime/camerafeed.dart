@@ -49,6 +49,8 @@ class _CameraFeedState extends State<CameraFeed> {
 
         controller!.startImageStream((CameraImage img) {
           if (!widget.isDetecting) {
+            print("Detection");
+
             widget.isDetecting = true;
             if (aa) {
               Tflite.runModelOnFrame(
@@ -57,7 +59,8 @@ class _CameraFeedState extends State<CameraFeed> {
                 }).toList(),
                 imageHeight: img.height,
                 imageWidth: img.width,
-                numResults: 2,
+                numResults: 1,
+                asynch: true,
               ).then((recognitions) {
                 int endTime = new DateTime.now().millisecondsSinceEpoch;
                 print("Detection $recognitions");
@@ -78,7 +81,7 @@ class _CameraFeedState extends State<CameraFeed> {
                 numResultsPerClass: 1,
                 threshold: 0.4,
                 asynch: true,
-                model: "SSDMobileNet",
+                // model: "SSDMobileNet",
                 // numResults: 1,
               ).then((recognitions) {
                 /*
