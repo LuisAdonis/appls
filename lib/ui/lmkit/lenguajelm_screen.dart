@@ -31,9 +31,12 @@ class _LenguahelmScreenState extends State<LenguahelmScreen> {
     cameras = await availableCameras();
     setState(() {});
     await Tflite.loadModel(
-      model: "assets/tflite/mobilenet.tflite",
-      labels: "assets/tflite/labelss.txt",
-      numThreads: 4, // defaults to 1
+      model: "assets/tflite/detect.tflite",
+      labels: "assets/tflite/labelmap.txt",
+      numThreads: 1, // d
+      //  model: "assets/tflite/mobilenet.tflite",
+      // labels: "assets/tflite/labelss.txt",
+      // numThreads: 4, // defaults to 1
       isAsset: true, // defaults to true, set to false to load resources outside assets
       useGpuDelegate: false,
     );

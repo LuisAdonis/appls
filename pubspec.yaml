@@ -94,6 +94,10 @@ flutter:
     - assets/menu/
     - assets/tflite/detect.tflite
     - assets/tflite/labelmap.txt
+    - assets/tflite/mobilenet.tflite
+    - assets/tflite/labelss.txt
+    - assets/tflite/model_unquant.tflite
+    - assets/tflite/labelsss.txt
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
